@@ -6,7 +6,7 @@ class ProductController {
         const where = {}
 
         if (search) where.name = {[Sequelize.Op.iLike]: `%${search}`}
-        if (is_active) where.is_active = {[Sequelize.Op.like]: is_active}
+        if (is_active) where.is_active = {[Sequelize.Op.eq]: is_active}
         
         Product.findAll({
             attributes: {
