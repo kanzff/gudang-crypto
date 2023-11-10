@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     role: DataTypes.STRING,
     password: DataTypes.STRING,
-    is_active: DataTypes.BOOLEAN
+    is_active: DataTypes.BOOLEAN,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
-    paranoid: true,
     modelName: 'User',
   });
   return User;

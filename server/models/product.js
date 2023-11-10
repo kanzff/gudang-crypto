@@ -17,10 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.BIGINT,
     image: DataTypes.STRING,
-    is_active: DataTypes.BOOLEAN
+    is_active: DataTypes.BOOLEAN,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     paranoid: true,
+    timestamps: true,
     modelName: 'Product',
   });
   return Product;
