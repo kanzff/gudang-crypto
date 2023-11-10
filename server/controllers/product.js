@@ -1,7 +1,8 @@
 const { Product, Sequelize } = require('../models')
 
+
 class ProductController {
-    static findProduct(req, res, next) {
+    static find(req, res, next) {
         const { offset, limit, search, is_active } = req.query
         const where = {}
 
@@ -21,13 +22,26 @@ class ProductController {
         })
         .then(data => {
             res.status(200).json(data)
+            // version 2??
+            // res.status(200).send({
+            //     code: 200,
+            //     message: "Success",
+            //     data,
+            // })
+
         })
         .catch(err => {
             next({ message: "Internal Server Error"})
         })
     }
 
-    static addProduct(req, res, next) {
+    static add(req, res, next) {
+        
+        // check('name')
+        // .notEmpty().withMessage('Name cannot be empty')
+        // const validationErrors = validationResult(req)
+        // if (!validationErrors.isEmpty()) return res.status(400).json({ errors: validationErrors.array()})
+        
         const { name, price, image, is_active} = req.body
         let obj = {
             name,
@@ -44,7 +58,7 @@ class ProductController {
         })
     }
     
-    static findProductById(req, res, next) {
+    static findById(req, res, next) {
         let id = req.params.id
         Product.findByPk(id, {
             attributes: {
@@ -106,4 +120,4 @@ class ProductController {
 
 }
 
-module.exports = {ProductController}
+module.exports = { ProductController }
