@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+import Landing from './pages/Landing'
+import Dashboard from './pages/Dashboard';
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Landing/>,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard/>,
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
