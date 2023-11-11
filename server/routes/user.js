@@ -6,3 +6,5 @@ router.get('/', UserController.find)
 router.post('/', userValidation, validate, UserController.add)
 router.put('/:id', userValidation, validate, UserController.update)
 router.delete('/:id', UserController.delete)
+
+module.exports = router
