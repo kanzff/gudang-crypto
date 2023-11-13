@@ -120,6 +120,56 @@ const Dashboard = () => {
                     </div>
                 </div>
             }
+            { currentTab === 'user' &&
+                <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
+                    <div className='flex justify-between'>
+                        <p className='font-medium text-xl'>Manajemen User</p>
+                        <button type='button' className='font-medium text-xl bg-blue-600 py-2 px-6 rounded-lg text-white'>TAMBAH USER</button>
+                    </div>
+                   
+                    <div className='bg-white border rounded-lg shadow p-6 font-medium my-6'>
+                        <div className='my-4 p-2 flex justify-between gap-58 border rounded-lg bg-blue-500 text-white'>
+                            <p>No</p>
+                            <p>Email</p>
+                            <p>Nama Lengkap</p>
+                            <p>No. Telepon</p>
+                            <p>Status</p>
+                            <p className='text-blue-500'>Action</p>
+                        </div>
+                        <div>
+                            {/* user list */}
+                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
+                                <p>1</p>
+                                <p>Aden S. Putra</p>
+                                <p>aden@gmail.com</p>
+                                <p>0812344345</p>
+                                <p>Aktiv</p>
+                            </div>
+                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
+                                <p>1</p>
+                                <p>Aden S. Putra</p>
+                                <p>aden@gmail.com</p>
+                                <p>0812344345</p>
+                                <p>Aktiv</p>
+                            </div>
+                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
+                                <p>1</p>
+                                <p>Aden S. Putra</p>
+                                <p>aden@gmail.com</p>
+                                <p>0812344345</p>
+                                <p>Aktiv</p>
+                            </div>
+                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
+                                <p>1</p>
+                                <p>Aden S. Putra</p>
+                                <p>aden@gmail.com</p>
+                                <p>0812344345</p>
+                                <p>Aktiv</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </>
     )
 }
