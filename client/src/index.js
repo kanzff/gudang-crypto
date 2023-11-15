@@ -10,6 +10,9 @@ import {
 
 import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard';
+import Test from './pages/Test';
+
+
 
 
 const router = createBrowserRouter([
@@ -20,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard/>,
+  },
+  {
+    path: "/test",
+    element: <Test/>,
   }
 ]);
 
