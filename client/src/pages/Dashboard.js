@@ -128,43 +128,98 @@ const Dashboard = () => {
                     </div>
                    
                     <div className='bg-white border rounded-lg shadow p-6 font-medium my-6'>
-                        <div className='my-4 p-2 flex justify-between gap-58 border rounded-lg bg-blue-500 text-white'>
-                            <p>No</p>
-                            <p>Email</p>
-                            <p>Nama Lengkap</p>
-                            <p>No. Telepon</p>
-                            <p>Status</p>
-                            <p className='text-blue-500'>Action</p>
+                        <div className='my-4 p-2 flex justify-start  border rounded-lg bg-blue-500 text-white'>
+                            <p className='w-12 text-center'>No</p>
+                            <p className='w-80 text-center'>Nama Lengkap</p>
+                            <p className='w-80 text-center'>Email</p>
+                            <p className='w-80 text-center'>No. Telepon</p>
+                            <p className='w-72 text-center'>Status</p>
                         </div>
                         <div>
                             {/* user list */}
-                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
-                                <p>1</p>
-                                <p>Aden S. Putra</p>
-                                <p>aden@gmail.com</p>
-                                <p>0812344345</p>
-                                <p>Aktiv</p>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <p className='w-80 text-center'>Aden S. Putra</p>
+                                <p className='w-80 text-center'>aden@gmail.com</p>
+                                <p className='w-80 text-center'>082122347856</p>
+                                <p className='w-72 text-center'>AKTIV</p>
                             </div>
-                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
-                                <p>1</p>
-                                <p>Aden S. Putra</p>
-                                <p>aden@gmail.com</p>
-                                <p>0812344345</p>
-                                <p>Aktiv</p>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <p className='w-80 text-center'>Aden S. Putra</p>
+                                <p className='w-80 text-center'>aden@gmail.com</p>
+                                <p className='w-80 text-center'>082122347856</p>
+                                <p className='w-72 text-center'>AKTIV</p>
                             </div>
-                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
-                                <p>1</p>
-                                <p>Aden S. Putra</p>
-                                <p>aden@gmail.com</p>
-                                <p>0812344345</p>
-                                <p>Aktiv</p>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <p className='w-80 text-center'>Aden S. Putra</p>
+                                <p className='w-80 text-center'>aden@gmail.com</p>
+                                <p className='w-80 text-center'>082122347856</p>
+                                <p className='w-72 text-center'>AKTIV</p>
                             </div>
-                            <div className='my-4 p-2 flex justify-start gap-56 items-center'>
-                                <p>1</p>
-                                <p>Aden S. Putra</p>
-                                <p>aden@gmail.com</p>
-                                <p>0812344345</p>
-                                <p>Aktiv</p>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <p className='w-80 text-center'>Aden S. Putra</p>
+                                <p className='w-80 text-center'>aden@gmail.com</p>
+                                <p className='w-80 text-center'>082122347856</p>
+                                <p className='w-72 text-center'>AKTIV</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            { currentTab === 'product' &&
+                <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
+                    <div className='flex justify-between'>
+                        <p className='font-medium text-xl'>Manajemen Produk</p>
+                        <button type='button' className='font-medium text-xl bg-blue-600 py-2 px-6 rounded-lg text-white'>TAMBAH USER</button>
+                    </div>
+                   
+                    <div className='bg-white border rounded-lg shadow p-6 font-medium my-6'>
+                        <div className='my-4 p-2 flex justify-start  border rounded-lg bg-blue-500 text-white'>
+                            <p className='w-12 text-center'>No</p>
+                            <p className='w-[40rem] text-center'>Nama</p>
+                            <p className='w-80 text-center'>Harga</p>
+                            <p className='w-72 text-center'>Status</p>
+                        </div>
+                        <div>
+                            {/* user list */}
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <div className='w-[40rem] flex justify-center items-center'>
+                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
+                                    <p className='w-80 p-12'>Versace</p>
+                                </div>
+                                <p className='w-80 text-center'>Rp. 125000</p>
+                                <p className='w-72 text-center'>AKTIV</p>
+                            </div>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <div className='w-[40rem] flex justify-center items-center'>
+                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
+                                    <p className='w-80 p-12'>Versace</p>
+                                </div>
+                                <p className='w-80 text-center'>Rp. 125000</p>
+                                <p className='w-72 text-center'>AKTIV</p>
+                            </div>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <div className='w-[40rem] flex justify-center items-center'>
+                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
+                                    <p className='w-80 p-12'>Versace</p>
+                                </div>
+                                <p className='w-80 text-center'>Rp. 125000</p>
+                                <p className='w-72 text-center'>AKTIV</p>
+                            </div>
+                            <div className='my-4 p-2 flex justify-start items-center'>
+                                <p className='w-12 text-center'>1</p>
+                                <div className='w-[40rem] flex justify-center items-center'>
+                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
+                                    <p className='w-80 p-12'>Versace</p>
+                                </div>
+                                <p className='w-80 text-center'>Rp. 125000</p>
+                                <p className='w-72 text-center'>AKTIV</p>
                             </div>
                         </div>
                     </div>
