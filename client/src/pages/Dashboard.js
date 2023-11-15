@@ -1,13 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from 'flowbite-react';
+import axios from 'axios'
 
 import AddProduct from '../components/AddProduct';
+import ProductList from '../components/ProductList';
 
 const Dashboard = () => {
 
     const [currentTab, setCurrentTab] = useState('dashboard')
     const [openModal, setOpenModal] = useState(false);
+    const [products, setProducts] = useState([])
     // const emailInputRef = useRef<HTMLInputElement>(null);
+    const baseUrl =  "http://localhost:3001"
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    const getProducts = () => {
+        axios.get(`${baseUrl}/product`)
+        .then(res => {
+            console.log(res.data)
+            setProducts(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
     
     return (
         <>
@@ -191,34 +210,12 @@ const Dashboard = () => {
                             <p className='w-72 text-center'>Status</p>
                         </div>
                         <div>
-                            {/* user list */}
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <div className='w-[40rem] flex justify-center items-center'>
-                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
-                                    <p className='w-80 p-12'>Versace</p>
-                                </div>
-                                <p className='w-80 text-center'>Rp. 125000</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <div className='w-[40rem] flex justify-center items-center'>
-                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
-                                    <p className='w-80 p-12'>Versace</p>
-                                </div>
-                                <p className='w-80 text-center'>Rp. 125000</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <div className='w-[40rem] flex justify-center items-center'>
-                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
-                                    <p className='w-80 p-12'>Versace</p>
-                                </div>
-                                <p className='w-80 text-center'>Rp. 125000</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
+                            {/* prouduct list */}
+                            {products.length &&
+                                products.map((product, i) => {
+                                    return <ProductList product={product}  key={i}/>
+                                })
+                            }
                             <div className='my-4 p-2 flex justify-start items-center'>
                                 <p className='w-12 text-center'>1</p>
                                 <div className='w-[40rem] flex justify-center items-center'>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Product = () => {
+const ProductCard = () => {
   return (
     <div className="w-72 h-86 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
@@ -18,4 +18,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default ProductCard
