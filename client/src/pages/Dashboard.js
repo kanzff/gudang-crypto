@@ -8,7 +8,7 @@ import ProductList from '../components/ProductList';
 const Dashboard = () => {
 
     const [currentTab, setCurrentTab] = useState('dashboard')
-    const [openModal, setOpenModal] = useState(false);
+    const [addModal, setAddModal] = useState(false);
     const [products, setProducts] = useState([])
     const baseUrl =  "http://localhost:3001"
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
         .then(res => {
             console.log(res)
             getProducts()
-            setOpenModal(false)
+            setAddModal(false)
 
         })
         .catch(err => {
@@ -45,22 +45,22 @@ const Dashboard = () => {
         })
     }
 
-    const editProduct = (id, name, price, image, is_active) => {
-        axios.put(`${baseUrl}/product/${id}`, {
-            name,
-            price,
-            image,
-            is_active,
-        })
-        .then(res => {
-            console.log(res)
-            getProducts()
+    // const editProduct = (id, name, price, image, is_active) => {
+    //     axios.put(`${baseUrl}/product/${id}`, {
+    //         name,
+    //         price,
+    //         image,
+    //         is_active,
+    //     })
+    //     .then(res => {
+    //         console.log(res)
+    //         getProducts()
 
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    // }
     
     return (
         <>
@@ -228,12 +228,12 @@ const Dashboard = () => {
             }
             { currentTab === 'product' &&
                 <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
-                    <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)}>
+                    <Modal show={addModal} size="md" popup onClose={() => setAddModal(false)}>
                         <AddProduct addProduct={addProduct}/>
                     </Modal>
                     <div className='flex justify-between'>
                         <p className='font-medium text-xl'>Manajemen Produk</p>
-                        <button type='button' onClick={() => setOpenModal(true)} className='font-medium text-xl bg-blue-600 py-2 px-6 rounded-lg text-white'>TAMBAH PRODUK</button>
+                        <button type='button' onClick={() => setAddModal(true)} className='font-medium text-xl bg-blue-600 py-2 px-6 rounded-lg text-white'>TAMBAH PRODUK</button>
                     </div>
                    
                     <div className='bg-white border rounded-lg shadow p-6 font-medium my-6'>
@@ -242,12 +242,13 @@ const Dashboard = () => {
                             <p className='w-[40rem] text-center'>Nama</p>
                             <p className='w-80 text-center'>Harga</p>
                             <p className='w-48 text-center'>Status</p>
+                            <p className='w-72'></p>
                         </div>
                         <div>
                             {/* prouduct list */}
                             {products.length &&
                                 products.map((product, i) => {
-                                    return <ProductList product={product} editProduct={editProduct}  key={i}/>
+                                    return <ProductList product={product} getProducts={getProducts}  key={i}/>
                                 })
                             }
                         </div>
