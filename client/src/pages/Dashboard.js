@@ -4,16 +4,21 @@ import axios from 'axios'
 
 import AddProduct from '../components/AddProduct';
 import ProductList from '../components/ProductList';
+import UserList from '../components/UserList';
+import AddUser from '../components/AddUser';
 
 const Dashboard = () => {
 
     const [currentTab, setCurrentTab] = useState('dashboard')
     const [addModal, setAddModal] = useState(false);
+    const [addUserModal, setAddUserModal] = useState(false);
     const [products, setProducts] = useState([])
-    const baseUrl =  "http://localhost:3001"
+    const [users, setUsers] = useState([])
+    const baseUrl =  "http://localhost:3000"
 
     useEffect(() => {
         getProducts()
+        getUsers()
     }, [])
 
     const getProducts = async () => {
@@ -21,6 +26,17 @@ const Dashboard = () => {
         .then(res => {
             console.log(res.data)
             setProducts(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const getUsers = async () => {
+        axios.get(`${baseUrl}/user`)
+        .then(res => {
+            console.log(res.data)
+            setUsers(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -45,22 +61,23 @@ const Dashboard = () => {
         })
     }
 
-    // const editProduct = (id, name, price, image, is_active) => {
-    //     axios.put(`${baseUrl}/product/${id}`, {
-    //         name,
-    //         price,
-    //         image,
-    //         is_active,
-    //     })
-    //     .then(res => {
-    //         console.log(res)
-    //         getProducts()
+    const addUser = (name, email, phone, is_active) => {
+        axios.post(`${baseUrl}/user`, {
+            name,
+            email,
+            phone,
+            is_active,
+        })
+        .then(res => {
+            console.log(res)
+            getUsers()
+            setAddUserModal(false)
 
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
     
     return (
         <>
@@ -125,19 +142,19 @@ const Dashboard = () => {
                     <div className='flex justify-between my-10 font-medium'>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <p className='text-slate-400'>Jumlah User</p>
-                            <p className='text-xl'>150 User</p>
+                            <p className='text-xl'>{users.length} User</p>
                         </div>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <p className='text-slate-400'>Jumlah User Aktif</p>
-                            <p className='text-xl'>150 User</p>
+                            <p className='text-xl'>{users.filter(u => u.is_active === true).length} User</p>
                         </div>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <p className='text-slate-400'>Jumlah Produk</p>
-                            <p className='text-xl'>150 User</p>
+                            <p className='text-xl'>{products.length} User</p>
                         </div>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <p className='text-slate-400'>Jumlah Produk Aktif</p>
-                            <p className='text-xl'>150 User</p>
+                            <p className='text-xl'>{products.filter(p => p.is_active === true).length} User</p>
                         </div>
                     </div>
                     <div className='bg-white border rounded-lg shadow max-w-4xl p-6 font-medium'>
@@ -179,49 +196,30 @@ const Dashboard = () => {
             }
             { currentTab === 'user' &&
                 <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
+                    <Modal show={addUserModal} size="md" popup onClose={() => setAddUserModal(false)}>
+                        <AddUser addUser={addUser}/>
+                    </Modal>
                     <div className='flex justify-between'>
                         <p className='font-medium text-xl'>Manajemen User</p>
-                        <button type='button' className='font-medium text-xl bg-blue-600 py-2 px-6 rounded-lg text-white'>TAMBAH USER</button>
+                        <button type='button' onClick={() => setAddUserModal(true)} className='font-medium text-xl bg-blue-600 py-2 px-6 rounded-lg text-white'>TAMBAH USER</button>
                     </div>
                    
                     <div className='bg-white border rounded-lg shadow p-6 font-medium my-6'>
                         <div className='my-4 p-2 flex justify-start  border rounded-lg bg-blue-500 text-white'>
-                            <p className='w-12 text-center'>No</p>
+                            <p className='w-8 text-center'>No</p>
                             <p className='w-80 text-center'>Nama Lengkap</p>
                             <p className='w-80 text-center'>Email</p>
                             <p className='w-80 text-center'>No. Telepon</p>
-                            <p className='w-72 text-center'>Status</p>
+                            <p className='w-48 text-center'>Status</p>
+                            <p className='w-72'></p>
                         </div>
                         <div>
                             {/* user list */}
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <p className='w-80 text-center'>Aden S. Putra</p>
-                                <p className='w-80 text-center'>aden@gmail.com</p>
-                                <p className='w-80 text-center'>082122347856</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <p className='w-80 text-center'>Aden S. Putra</p>
-                                <p className='w-80 text-center'>aden@gmail.com</p>
-                                <p className='w-80 text-center'>082122347856</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <p className='w-80 text-center'>Aden S. Putra</p>
-                                <p className='w-80 text-center'>aden@gmail.com</p>
-                                <p className='w-80 text-center'>082122347856</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <p className='w-80 text-center'>Aden S. Putra</p>
-                                <p className='w-80 text-center'>aden@gmail.com</p>
-                                <p className='w-80 text-center'>082122347856</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
+                            {users.length && 
+                                users.map((user, i) => {
+                                    return <UserList user={user} getUsers={getUsers} key={i}/>
+                                })
+                            }
                         </div>
                     </div>
                 </div>
