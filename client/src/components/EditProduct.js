@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { Button, ToggleSwitch , Label, Modal, TextInput } from 'flowbite-react';
 
 
-const AddProduct = ({addProduct}) => {
+const EditProduct = ({product, editProduct}) => {
 
-    const [switch1, setSwitch1] = useState(true);
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [image, setImage] = useState('')
+    const [switch1, setSwitch1] = useState(product.is_active);
+    const [name, setName] = useState(product.name)
+    const [price, setPrice] = useState(product.price)
+    const [image, setImage] = useState(product.image)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        addProduct(name, price, image, switch1)
+        editProduct(product.id, name, price, image, switch1)
     }
 
 
@@ -21,7 +21,7 @@ const AddProduct = ({addProduct}) => {
                 <Modal.Header />
                     <Modal.Body>
                     <div className="space-y-6">
-                        <h3 className="text-2xl text-center font-medium text-gray-900 dark:text-white">Tambah Produk</h3>
+                        <h3 className="text-2xl text-center font-medium text-gray-900 dark:text-white">Edit Produk</h3>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="name" value="Nama" />
@@ -63,4 +63,4 @@ const AddProduct = ({addProduct}) => {
     )
 }
 
-export default AddProduct
+export default EditProduct

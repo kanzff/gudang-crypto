@@ -10,18 +10,52 @@ const Dashboard = () => {
     const [currentTab, setCurrentTab] = useState('dashboard')
     const [openModal, setOpenModal] = useState(false);
     const [products, setProducts] = useState([])
-    // const emailInputRef = useRef<HTMLInputElement>(null);
     const baseUrl =  "http://localhost:3001"
 
     useEffect(() => {
         getProducts()
     }, [])
 
-    const getProducts = () => {
+    const getProducts = async () => {
         axios.get(`${baseUrl}/product`)
         .then(res => {
             console.log(res.data)
             setProducts(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const addProduct = (name, price, image, is_active) => {
+        axios.post(`${baseUrl}/product`, {
+            name,
+            price,
+            image,
+            is_active,
+        })
+        .then(res => {
+            console.log(res)
+            getProducts()
+            setOpenModal(false)
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const editProduct = (id, name, price, image, is_active) => {
+        axios.put(`${baseUrl}/product/${id}`, {
+            name,
+            price,
+            image,
+            is_active,
+        })
+        .then(res => {
+            console.log(res)
+            getProducts()
+
         })
         .catch(err => {
             console.log(err)
@@ -94,15 +128,15 @@ const Dashboard = () => {
                             <p className='text-xl'>150 User</p>
                         </div>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <p className='text-slate-400'>Jumlah User</p>
+                            <p className='text-slate-400'>Jumlah User Aktif</p>
                             <p className='text-xl'>150 User</p>
                         </div>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <p className='text-slate-400'>Jumlah User</p>
+                            <p className='text-slate-400'>Jumlah Produk</p>
                             <p className='text-xl'>150 User</p>
                         </div>
                         <div className="w-72 max-w-sm p-6 bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <p className='text-slate-400'>Jumlah User</p>
+                            <p className='text-slate-400'>Jumlah Produk Aktif</p>
                             <p className='text-xl'>150 User</p>
                         </div>
                     </div>
@@ -195,7 +229,7 @@ const Dashboard = () => {
             { currentTab === 'product' &&
                 <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
                     <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)}>
-                        <AddProduct/>
+                        <AddProduct addProduct={addProduct}/>
                     </Modal>
                     <div className='flex justify-between'>
                         <p className='font-medium text-xl'>Manajemen Produk</p>
@@ -207,24 +241,15 @@ const Dashboard = () => {
                             <p className='w-12 text-center'>No</p>
                             <p className='w-[40rem] text-center'>Nama</p>
                             <p className='w-80 text-center'>Harga</p>
-                            <p className='w-72 text-center'>Status</p>
+                            <p className='w-48 text-center'>Status</p>
                         </div>
                         <div>
                             {/* prouduct list */}
                             {products.length &&
                                 products.map((product, i) => {
-                                    return <ProductList product={product}  key={i}/>
+                                    return <ProductList product={product} editProduct={editProduct}  key={i}/>
                                 })
                             }
-                            <div className='my-4 p-2 flex justify-start items-center'>
-                                <p className='w-12 text-center'>1</p>
-                                <div className='w-[40rem] flex justify-center items-center'>
-                                    <img className="w-28" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />
-                                    <p className='w-80 p-12'>Versace</p>
-                                </div>
-                                <p className='w-80 text-center'>Rp. 125000</p>
-                                <p className='w-72 text-center'>AKTIF</p>
-                            </div>
                         </div>
                     </div>
                 </div>
