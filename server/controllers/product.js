@@ -11,7 +11,7 @@ class ProductController {
         
         Product.findAll({
             attributes: {
-                exclude: [ 'createdAt', 'updatedAt', 'deletedAt']
+                exclude: [ 'updatedAt', 'deletedAt']
             },
             where: {
                 ...where

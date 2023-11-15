@@ -6,6 +6,7 @@ import AddProduct from '../components/AddProduct';
 import ProductList from '../components/ProductList';
 import UserList from '../components/UserList';
 import AddUser from '../components/AddUser';
+import { ProductListFront } from '../components/ProductListFront';
 
 const Dashboard = () => {
 
@@ -157,39 +158,20 @@ const Dashboard = () => {
                             <p className='text-xl'>{products.filter(p => p.is_active === true).length} User</p>
                         </div>
                     </div>
-                    <div className='bg-white border rounded-lg shadow max-w-4xl p-6 font-medium'>
+                    <div className='bg-white border rounded-lg shadow max-w-5xl p-6 font-medium'>
                         <p>Produk Terbaru</p>
-                        <div className='my-4 p-2 flex justify-between border rounded-lg bg-blue-500 text-white'>
-                            <p>Produk</p>
-                            <p>Tanggal dibuat</p>
-                            <p>Harga (Rp)</p>
+                        <div className='my-4 p-2 flex justify-start border rounded-lg bg-blue-500 text-white'>
+                            <p className='w-[30rem]'>Produk</p>
+                            <p className='w-56'>Tanggal dibuat</p>
+                            <p className='w-56'>Harga (Rp)</p>
                         </div>
                         <div>
                             {/* product list */}
-                            <div className='my-4 p-2 flex justify-between items-center'>
-                                <div className='flex justify-start items-center'>
-                                    <img className="w-24 pr-4  rounded-t-lg" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />    
-                                    <p>Microsoft Surface</p>
-                                </div>
-                                <p>12 May 2023</p>
-                                <p>Rp. 400000</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-between items-center'>
-                                <div className='flex justify-start items-center'>
-                                    <img className="w-24 pr-4  rounded-t-lg" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />    
-                                    <p>Microsoft Surface</p>
-                                </div>
-                                <p>12 May 2023</p>
-                                <p>Rp. 400000</p>
-                            </div>
-                            <div className='my-4 p-2 flex justify-between items-center'>
-                                <div className='flex justify-start items-center'>
-                                    <img className="w-24 pr-4  rounded-t-lg" src="https://m.media-amazon.com/images/I/61S6hE2xBuL._SL1480_.jpg" alt="product image" />    
-                                    <p>Microsoft Surface</p>
-                                </div>
-                                <p>12 May 2023</p>
-                                <p>Rp. 400000</p>
-                            </div>
+                            {!!products.length && 
+                                products.map((product, i) => {
+                                    return <ProductListFront product={product} key={i}/>
+                                })
+                            }
                         </div>
                     </div>
                 </div>
@@ -215,7 +197,7 @@ const Dashboard = () => {
                         </div>
                         <div>
                             {/* user list */}
-                            {users.length && 
+                            {!!users.length && 
                                 users.map((user, i) => {
                                     return <UserList user={user} getUsers={getUsers} key={i}/>
                                 })
@@ -244,7 +226,7 @@ const Dashboard = () => {
                         </div>
                         <div>
                             {/* prouduct list */}
-                            {products.length &&
+                            {!!products.length &&
                                 products.map((product, i) => {
                                     return <ProductList product={product} getProducts={getProducts}  key={i}/>
                                 })
