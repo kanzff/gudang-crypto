@@ -10,7 +10,8 @@ import {
 
 import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard';
-import Test from './pages/Test';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 
 
@@ -25,8 +26,12 @@ const router = createBrowserRouter([
     element: <Dashboard/>,
   },
   {
-    path: "/test",
-    element: <Test/>,
+    path: "/login",
+    element: <Login/>,
+  },
+  {
+    path: "/register",
+    element: <Register/>,
   }
 ]);
 
