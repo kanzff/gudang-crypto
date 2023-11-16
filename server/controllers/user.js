@@ -1,5 +1,6 @@
 const { User, Sequelize } = require('../models')
-
+const { comparePass } = require('../helpers/bcrypt')
+const { generateToken } = require('../helpers/jwt')
 
 class UserController {
     static find(req, res, next) {
@@ -42,11 +43,12 @@ class UserController {
         // const validationErrors = validationResult(req)
         // if (!validationErrors.isEmpty()) return res.status(400).json({ errors: validationErrors.array()})
         
-        const { name, email, phone, is_active, role} = req.body
+        const { name, email, phone, password, is_active, role} = req.body
         let obj = {
             name,
             email,
             phone,
+            password,
             is_active,
             role,
         }
@@ -57,6 +59,41 @@ class UserController {
         .catch(err => {
             next(err)
         })
+    }
+
+    static async login(req, res, next) {
+        try {
+            const { email, password } = req.body
+    
+            const user = await User.findOne({
+                where: {
+                    email
+                }
+            })
+            if (!user) {
+                next({name: 'Invalid Email / Password'})
+            } else {
+                const isValidPass = comparePass(password, user.password)
+                if (isValidPass) {
+                    const payload = {
+                        id: user.id,
+                        email: user.email
+                    }
+                    const access_token = generateToken(payload)
+                    const userData = {
+                      access_token,
+                      email: user.email,
+                      role: user.role
+                    }
+                    return res.status(200).json(userData)
+                } else {
+                    next({name: 'Invalid Email / Password'})
+                }
+            }
+        } catch (err) {
+            console.log(err)
+            next(err)
+        }
     }
     
     // static findUserById(req, res, next) {
