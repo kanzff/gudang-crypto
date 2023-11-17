@@ -1,8 +1,11 @@
 import { Button, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+    const navigate = useNavigate()
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -22,6 +25,7 @@ const Register = () => {
         })
         .then(res => {
             console.log(res)
+            navigate('/login')
 
         })
         .catch(err => {
@@ -65,7 +69,7 @@ const Register = () => {
                     </div>
                     <div>
                         <div className="mb-2 block">
-                            <Label htmlFor="phone" value="Password" />
+                            <Label htmlFor="password" value="Password" />
                         </div>
                         <TextInput id="password" type="password" required value={password} onChange={(e)=> setPassword(e.target.value)} />
                     </div>

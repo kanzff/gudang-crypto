@@ -13,6 +13,7 @@ import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ProtectedAuthRoutes from './pages/ProtectedAuthoutes';
 
 
 
@@ -24,11 +25,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login/>,
+    element:
+      <ProtectedAuthRoutes>
+        <Login/>
+      </ProtectedAuthRoutes>,
   },
   {
     path: "/register",
-    element: <Register/>,
+    element:
+      <ProtectedAuthRoutes>
+        <Register/>
+      </ProtectedAuthRoutes>,
   },
   {
     path: "/dashboard",

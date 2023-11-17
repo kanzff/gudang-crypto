@@ -21,6 +21,16 @@ const userValidation =  [
     check('password')
         .notEmpty().withMessage('Password cannot be empty'),
 ]
+
+const userEditValidation =  [
+    check('name')
+        .notEmpty().withMessage('Name cannot be empty'),
+    check('email')
+        .notEmpty().withMessage('Email cannot be empty')
+        .isEmail().withMessage('Email format is incorrect'),
+    check('phone')
+        .notEmpty().withMessage('Phone cannot be empty'),
+]
 const loginValidation =  [
     check('email')
         .notEmpty().withMessage('Email cannot be empty')
@@ -39,6 +49,7 @@ module.exports = {
     productValidation,
     userValidation,
     loginValidation,
+    userEditValidation,
     validate,
 }
 

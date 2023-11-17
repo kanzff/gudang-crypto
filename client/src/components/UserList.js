@@ -26,7 +26,7 @@ const UserList = ({user, getUsers}) => {
 
         })
         .catch(err => {
-            console.log(err)
+            console.log(err.response)
         })
     }
 

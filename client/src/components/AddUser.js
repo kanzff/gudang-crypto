@@ -8,10 +8,12 @@ const AddUser = ({user, register}) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
+    const [password, setPassword] = useState('')
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        register(name, email, phone, switch1)
+        register(name, email, phone, password, 'admin', switch1)
     }
 
 
@@ -39,6 +41,12 @@ const AddUser = ({user, register}) => {
                                 <Label htmlFor="phone" value="No. Telepon" />
                             </div>
                             <TextInput id="phone" type="number" required value={phone} onChange={(e)=> setPhone(e.target.value)} />
+                        </div>
+                        <div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="password" value="Password" />
+                            </div>
+                            <TextInput id="password" type="password" required value={password} onChange={(e)=> setPassword(e.target.value)} />
                         </div>
                         <div>
                             <div className="mb-2 block">

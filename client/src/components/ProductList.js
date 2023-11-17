@@ -12,6 +12,7 @@ const ProductList = ({product, getProducts}) => {
 
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false)
+    const access_token = localStorage.getItem('access_token')
 
     const editProduct = (id, name, price, image, is_active) => {
         axios.put(`${baseUrl}/product/${id}`, {
@@ -19,6 +20,10 @@ const ProductList = ({product, getProducts}) => {
             price,
             image,
             is_active,
+        }, {
+            headers: {
+                access_token
+            }
         })
         .then(res => {
             console.log(res)
@@ -38,6 +43,10 @@ const ProductList = ({product, getProducts}) => {
             getProducts()
             setDeleteModal(false)
 
+        }, {
+            headers: {
+                access_token
+            }
         })
         .catch(err => {
             console.log(err)

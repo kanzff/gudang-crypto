@@ -7,6 +7,7 @@ import ProductList from '../components/ProductList';
 import UserList from '../components/UserList';
 import AddUser from '../components/AddUser';
 import { ProductListFront } from '../components/ProductListFront';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
@@ -15,12 +16,21 @@ const Dashboard = () => {
     const [addUserModal, setAddUserModal] = useState(false);
     const [products, setProducts] = useState([])
     const [users, setUsers] = useState([])
+    
     const baseUrl =  "http://localhost:3000"
+    const access_token = localStorage.getItem('access_token')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getProducts()
         getUsers()
     }, [])
+
+    const logout = () => {
+        localStorage.clear()
+        navigate('/')
+    }
 
     const getProducts = async () => {
         axios.get(`${baseUrl}/product`)
@@ -52,7 +62,7 @@ const Dashboard = () => {
             is_active,
         }, {
             headers: {
-                access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJqaGoyQGVtYWlsLmNvbSIsImlhdCI6MTcwMDE2Njk1OX0.blHj2tpFueiKEBi4X47fza0p7LrtHZ9iLFO4CEZmRiU'
+                access_token
             }
         })
         .then(res => {
@@ -66,11 +76,13 @@ const Dashboard = () => {
         })
     }
 
-    const register = (name, email, phone, is_active) => {
+    const register = (name, email, phone, password, role, is_active) => {
         axios.post(`${baseUrl}/user/register`, {
             name,
             email,
             phone,
+            password,
+            role,
             is_active,
         })
         .then(res => {
@@ -97,7 +109,9 @@ const Dashboard = () => {
                             <p className='text-blue-600'>Halo Admin</p>
                             <p>Aden S. Putra</p>
                         </div>
-                        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">O</button>
+                        <button onClick={logout} type="button" className=" mr-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Keluar</button>
+
+                        {/* <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">O</button> */}
                     </div>
                 </div>
             </nav>

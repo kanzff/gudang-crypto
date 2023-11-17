@@ -5,7 +5,7 @@ const { authenticate } = require('../middlewares/auth.js')
 
 
 router.get('/', ProductController.find)
-router.use(authenticate)
+// router.use(authenticate)
 router.post('/', productValidation, validate, ProductController.add)
 router.put('/:id', productValidation, validate, ProductController.update)
 router.delete('/:id', ProductController.delete)

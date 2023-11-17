@@ -118,6 +118,7 @@ class UserController {
 
     static update(req, res, next) {
         let id = req.params.id
+        console.log(id, req.body)
         const { name, email, phone, is_active, role} = req.body
         let obj = {
             name,
