@@ -2,14 +2,14 @@ import { Button, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../api/api'
+
 
 const Login = () => {
     const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    const baseUrl =  "http://localhost:3000"
 
     const login = (email, password) => {
         axios.post(`${baseUrl}/user/login`, {

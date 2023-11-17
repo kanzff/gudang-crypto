@@ -8,6 +8,7 @@ import UserList from '../components/UserList';
 import AddUser from '../components/AddUser';
 import { ProductListFront } from '../components/ProductListFront';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../api/api'
 
 const Dashboard = () => {
 
@@ -17,7 +18,6 @@ const Dashboard = () => {
     const [products, setProducts] = useState([])
     const [users, setUsers] = useState([])
     
-    const baseUrl =  "http://localhost:3000"
     const access_token = localStorage.getItem('access_token')
     const name = localStorage.getItem('username')
 

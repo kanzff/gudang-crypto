@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for gudang-crypto on 2023-11-17T23:48:17+07:00
+# fly.toml app configuration file generated for perfey on 2023-11-18T01:03:01+07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "gudang-crypto"
-primary_region = "sin"
+app = "perfey"
+primary_region = "lax"
 
 [build]
 

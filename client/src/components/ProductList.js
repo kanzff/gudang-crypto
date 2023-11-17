@@ -4,8 +4,7 @@ import axios from 'axios'
 
 import EditProduct from './EditProduct'
 import Delete from './Delete'
-
-const baseUrl =  "http://localhost:3000"
+import { baseUrl } from '../api/api'
 
 
 const ProductList = ({product, getProducts}) => {

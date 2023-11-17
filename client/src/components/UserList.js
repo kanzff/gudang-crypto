@@ -3,8 +3,7 @@ import axios from 'axios'
 import EditUser from './EditUser';
 import { Modal } from 'flowbite-react';
 import Delete from './Delete';
-
-const baseUrl =  "http://localhost:3000"
+import { baseUrl } from '../api/api'
 
 
 const UserList = ({user, getUsers}) => {

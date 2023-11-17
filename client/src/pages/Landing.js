@@ -4,10 +4,10 @@ import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 import Footer from '../components/Footer'
 import axios from 'axios'
+import { baseUrl } from '../api/api'
 
 const Landing = () => {
 
-    const baseUrl =  "http://localhost:3000"
     const [newProducts, setNewProducts] = useState([])
     const [newProductsIndex, setNewProductsIndex] = useState({start: 0, end: 6})
     const [products, setProducts] = useState([])

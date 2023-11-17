@@ -2,6 +2,7 @@ import { Button, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../api/api'
 
 const Register = () => {
     const navigate = useNavigate()
@@ -11,8 +12,6 @@ const Register = () => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const access_token = localStorage.getItem('access_token')
-
-    const baseUrl =  "http://localhost:3000"
 
     const reigister = (name, email, phone, password, role, is_active) => {
         axios.post(`${baseUrl}/user/register`, {
