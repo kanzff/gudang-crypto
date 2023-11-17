@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, ToggleSwitch , Label, Modal, TextInput } from 'flowbite-react';
+import { Button, ToggleSwitch , Label, Modal, TextInput, Select } from 'flowbite-react';
 
 
 const EditUser = ({user, editUser}) => {
@@ -8,10 +8,11 @@ const EditUser = ({user, editUser}) => {
     const [name, setName] = useState(user.name)
     const [email, setEmail] = useState(user.email)
     const [phone, setPhone] = useState(user.phone)
+    const [role, setRole] = useState(user.role)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        editUser(user.id, name, email, phone, switch1)
+        editUser(user.id, name, email, phone, switch1, role)
     }
 
 
@@ -39,6 +40,15 @@ const EditUser = ({user, editUser}) => {
                                 <Label htmlFor="phone" value="No. Telepon" />
                             </div>
                             <TextInput id="phone" type="number" required value={phone} onChange={(e)=> setPhone(e.target.value)} />
+                        </div>
+                        <div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="countries" value="Role" />
+                            </div>
+                            <Select id="roles" value={role} onChange={(e) => setRole(e.target.value)} required>
+                                <option value={'user'}>User</option>
+                                <option value={'admin'}>Admin</option>
+                            </Select>
                         </div>
                         <div>
                             <div className="mb-2 block">

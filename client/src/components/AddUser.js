@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, ToggleSwitch , Label, Modal, TextInput } from 'flowbite-react';
+import { Button, ToggleSwitch , Label, Modal, TextInput, Select } from 'flowbite-react';
 
 
 const AddUser = ({user, register}) => {
@@ -9,11 +9,12 @@ const AddUser = ({user, register}) => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
+    const [role, setRole] = useState('user')
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        register(name, email, phone, password, 'admin', switch1)
+        register(name, email, phone, password, role, switch1)
     }
 
 
@@ -23,7 +24,7 @@ const AddUser = ({user, register}) => {
                 <Modal.Header />
                     <Modal.Body>
                     <div className="space-y-6">
-                        <h3 className="text-2xl text-center font-medium text-gray-900 dark:text-white">Edit User</h3>
+                        <h3 className="text-2xl text-center font-medium text-gray-900 dark:text-white">Tambah User</h3>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="name" value="Nama" />
@@ -47,6 +48,15 @@ const AddUser = ({user, register}) => {
                                 <Label htmlFor="password" value="Password" />
                             </div>
                             <TextInput id="password" type="password" required value={password} onChange={(e)=> setPassword(e.target.value)} />
+                        </div>
+                        <div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="countries" value="Role" />
+                            </div>
+                            <Select id="roles" onChange={(e) => setRole(e.target.value)} required>
+                                <option value={'user'}>User</option>
+                                <option value={'admin'}>Admin</option>
+                            </Select>
                         </div>
                         <div>
                             <div className="mb-2 block">
