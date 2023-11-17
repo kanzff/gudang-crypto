@@ -6,7 +6,7 @@ import Landing from './pages/Landing'
 function App() {
   return (
     <div className="App">
-      <Landing></Landing>
+      {/* <Landing></Landing> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

@@ -7,6 +7,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ProtectedRoutes from './ProtectedRoutes';
 
 import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard';
@@ -22,23 +23,29 @@ const router = createBrowserRouter([
     element: <Landing/>,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard/>,
-  },
-  {
     path: "/login",
     element: <Login/>,
   },
   {
     path: "/register",
     element: <Register/>,
-  }
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoutes>
+        <Dashboard/>
+      </ProtectedRoutes>
+    ),
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router}>
+      <App/>
+    </RouterProvider>
   </React.StrictMode>
 );
 

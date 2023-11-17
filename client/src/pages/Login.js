@@ -1,8 +1,11 @@
 import { Button, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -19,6 +22,7 @@ const Login = () => {
             localStorage.setItem('email', res.data.email)
             localStorage.setItem('role', res.data.role)
             localStorage.setItem('username', res.data.name)
+            navigate('/dashboard')
 
         })
         .catch(err => {

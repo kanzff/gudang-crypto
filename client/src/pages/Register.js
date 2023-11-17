@@ -1,4 +1,4 @@
-import { Button, Label, TextInput, ToggleSwitch } from 'flowbite-react'
+import { Button, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import axios from 'axios'
 
@@ -7,6 +7,7 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
+    const access_token = localStorage.getItem('access_token')
 
     const baseUrl =  "http://localhost:3000"
 
@@ -33,6 +34,8 @@ const Register = () => {
         e.preventDefault()
         reigister(name, email, phone, password,'user', true)
     }
+
+
 
     return (
         <>
