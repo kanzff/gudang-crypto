@@ -83,6 +83,7 @@ class UserController {
                     const userData = {
                       access_token,
                       email: user.email,
+                      name: user.name,
                       role: user.role
                     }
                     return res.status(200).json(userData)

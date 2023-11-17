@@ -50,6 +50,10 @@ const Dashboard = () => {
             price,
             image,
             is_active,
+        }, {
+            headers: {
+                access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJqaGoyQGVtYWlsLmNvbSIsImlhdCI6MTcwMDE2Njk1OX0.blHj2tpFueiKEBi4X47fza0p7LrtHZ9iLFO4CEZmRiU'
+            }
         })
         .then(res => {
             console.log(res)
@@ -62,8 +66,8 @@ const Dashboard = () => {
         })
     }
 
-    const addUser = (name, email, phone, is_active) => {
-        axios.post(`${baseUrl}/user`, {
+    const register = (name, email, phone, is_active) => {
+        axios.post(`${baseUrl}/user/register`, {
             name,
             email,
             phone,
@@ -179,7 +183,7 @@ const Dashboard = () => {
             { currentTab === 'user' &&
                 <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
                     <Modal show={addUserModal} size="md" popup onClose={() => setAddUserModal(false)}>
-                        <AddUser addUser={addUser}/>
+                        <AddUser register={register}/>
                     </Modal>
                     <div className='flex justify-between'>
                         <p className='font-medium text-xl'>Manajemen User</p>

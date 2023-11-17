@@ -1,15 +1,34 @@
-import { Button, Label, TextInput, ToggleSwitch } from 'flowbite-react'
+import { Button, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const Login = () => {
-    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
+
+    const baseUrl =  "http://localhost:3000"
+
+    const login = (email, password) => {
+        axios.post(`${baseUrl}/user/login`, {
+            email,
+            password,
+        })
+        .then(res => {
+            console.log(res)
+            localStorage.setItem('access_token', res.data.access_token)
+            localStorage.setItem('email', res.data.email)
+            localStorage.setItem('role', res.data.role)
+            localStorage.setItem('username', res.data.name)
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // addUser(name, email, phone, switch1)
+        login(email, password)
     }
 
     return (

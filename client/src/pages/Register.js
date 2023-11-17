@@ -1,5 +1,6 @@
 import { Button, Label, TextInput, ToggleSwitch } from 'flowbite-react'
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const Register = () => {
     const [name, setName] = useState('')
@@ -7,9 +8,30 @@ const Register = () => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
 
+    const baseUrl =  "http://localhost:3000"
+
+    const reigister = (name, email, phone, password, role, is_active) => {
+        axios.post(`${baseUrl}/user/register`, {
+            name,
+            email,
+            phone,
+            password,
+            role,
+            is_active,
+        })
+        .then(res => {
+            console.log(res)
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        // addUser(name, email, phone, switch1)
+        reigister(name, email, phone, password,'user', true)
     }
 
     return (

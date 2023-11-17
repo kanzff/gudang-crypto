@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, ToggleSwitch , Label, Modal, TextInput } from 'flowbite-react';
 
 
-const AddUser = ({user, addUser}) => {
+const AddUser = ({user, register}) => {
 
     const [switch1, setSwitch1] = useState(true);
     const [name, setName] = useState('')
@@ -11,7 +11,7 @@ const AddUser = ({user, addUser}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        addUser(name, email, phone, switch1)
+        register(name, email, phone, switch1)
     }
 
 
