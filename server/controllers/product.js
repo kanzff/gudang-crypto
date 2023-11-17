@@ -16,7 +16,7 @@ class ProductController {
             where: {
                 ...where
             },
-            order: [['createdAt', 'DESC']],
+            order: [['createdAt', 'DESC'], ['id', 'desc']],
             offset,
             limit
         })

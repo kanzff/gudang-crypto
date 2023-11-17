@@ -14,14 +14,15 @@ const Landing = () => {
     const [productsLimit, setProductsLimit] = useState(15)
 
     useEffect(() => {
-        getProducts(15, 0)
+        getProducts(15, 0, null, true)
     }, [])
 
-    const getProducts = async (limit, offset, search) => {
+    const getProducts = async (limit, offset, search, is_active) => {
         const params = {
             limit,
             offset,
             search,
+            is_active,
         }
         axios.get(`${baseUrl}/product`, {params})
         .then(res => {

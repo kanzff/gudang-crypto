@@ -19,6 +19,7 @@ const Dashboard = () => {
     
     const baseUrl =  "http://localhost:3000"
     const access_token = localStorage.getItem('access_token')
+    const name = localStorage.getItem('username')
 
     const navigate = useNavigate()
 
@@ -107,7 +108,7 @@ const Dashboard = () => {
                     <div className="flex ">
                         <div className='text-right mx-4 font-medium'>
                             <p className='text-blue-600'>Halo Admin</p>
-                            <p>Aden S. Putra</p>
+                            <p>{name}</p>
                         </div>
                         <button onClick={logout} type="button" className=" mr-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Keluar</button>
 
@@ -186,7 +187,7 @@ const Dashboard = () => {
                         <div>
                             {/* product list */}
                             {!!products.length && 
-                                products.map((product, i) => {
+                                products.slice(0, 10).map((product, i) => {
                                     return <ProductListFront product={product} key={i}/>
                                 })
                             }
