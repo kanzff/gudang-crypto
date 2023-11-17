@@ -13,7 +13,13 @@ module.exports = {
     password,
     database: process.env.DB_NAME_DEV,
     host,
-    dialect
+    dialect,
+    dialectOptions: {
+      ssl: {
+          require: true,
+          rejectUnauthorized: false
+      }
+   },
   },
   test: {
     username,
