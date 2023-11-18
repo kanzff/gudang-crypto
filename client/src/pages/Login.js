@@ -1,8 +1,9 @@
-import { Button, Label, TextInput } from 'flowbite-react'
+import { Button, Label, Spinner, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { baseUrl } from '../api/api'
+
 
 
 const Login = () => {
@@ -10,8 +11,12 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+
 
     const login = (email, password) => {
+        
+        setIsLoading(true)
         axios.post(`${baseUrl}/user/login`, {
             email,
             password,
@@ -23,10 +28,11 @@ const Login = () => {
             localStorage.setItem('role', res.data.role)
             localStorage.setItem('username', res.data.name)
             navigate('/dashboard')
-
+            isLoading(false)
         })
         .catch(err => {
             console.log(err)
+            setIsLoading(false)
         })
     }
 
@@ -55,9 +61,14 @@ const Login = () => {
                         </div>
                         <TextInput id="password" type="password" required value={password} onChange={(e)=> setPassword(e.target.value)} />
                     </div>
-                    <div className="w-full flex justify-center">
-                        <Button onClick={handleSubmit}>SIMPAN</Button>
-                    </div>
+                    {!!isLoading ? 
+                        <div className='flex m-4 justify-center'>
+                            <Spinner color="info" aria-label="Info spinner example" />
+                        </div> :
+                        <div className="w-full flex justify-center">
+                            <Button onClick={handleSubmit}>SIMPAN</Button>
+                        </div>
+                    }
                 </div>
             </div>
         </>

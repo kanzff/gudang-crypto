@@ -11,9 +11,13 @@ const ProductList = ({product, getProducts}) => {
 
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false)
+    const [isLoading, setIsloading] = useState(false)
     const access_token = localStorage.getItem('access_token')
 
+
     const editProduct = (id, name, price, image, is_active) => {
+
+        setIsloading(true)
         axios.put(`${baseUrl}/product/${id}`, {
             name,
             price,
@@ -28,19 +32,24 @@ const ProductList = ({product, getProducts}) => {
             console.log(res)
             getProducts()
             setEditModal(false)
+            setIsloading(false)
 
         })
         .catch(err => {
             console.log(err)
+            setIsloading(false)
         })
     }
 
     const deleteProduct = (id) => {
+
+        setIsloading(true)
         axios.delete(`${baseUrl}/product/${id}`)
         .then(res => {
             console.log(res)
             getProducts()
             setDeleteModal(false)
+            setIsloading(false)
 
         }, {
             headers: {
@@ -49,6 +58,8 @@ const ProductList = ({product, getProducts}) => {
         })
         .catch(err => {
             console.log(err)
+            setIsloading(false)
+
         })
     }
     
@@ -56,10 +67,10 @@ const ProductList = ({product, getProducts}) => {
     return (
         <>
             <Modal show={editModal} size="md" popup onClose={() => setEditModal(false)}>
-                <EditProduct product={product} editProduct={editProduct} setEditModal={setEditModal}/>
+                <EditProduct product={product} editProduct={editProduct} setEditModal={setEditModal} isLoading={isLoading}/>
             </Modal>
             <Modal show={deleteModal} size="md" popup onClose={() => setDeleteModal(false)}>
-                <Delete type={'product'} product={product} deleteProduct={deleteProduct} setDeleteModal={setDeleteModal}/>
+                <Delete type={'product'} product={product} deleteProduct={deleteProduct} setDeleteModal={setDeleteModal} isLoading={isLoading}/>
             </Modal>
             <div className='my-4 p-2 flex justify-start items-center'>
                 <p className='w-12 text-center'>{product.id}</p>

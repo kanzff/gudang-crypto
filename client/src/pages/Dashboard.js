@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Modal } from 'flowbite-react';
+import { Modal, Spinner } from 'flowbite-react';
 import axios from 'axios'
 
 import AddProduct from '../components/AddProduct';
@@ -17,6 +17,8 @@ const Dashboard = () => {
     const [addUserModal, setAddUserModal] = useState(false);
     const [products, setProducts] = useState([])
     const [users, setUsers] = useState([])
+    const [isLoading, setIsloading]= useState(false)
+    const [isLoadingModal, setIsloadingModal]= useState(false)
     
     const access_token = localStorage.getItem('access_token')
     const name = localStorage.getItem('username')
@@ -34,28 +36,38 @@ const Dashboard = () => {
     }
 
     const getProducts = async () => {
+
+        setIsloading(true)
         axios.get(`${baseUrl}/product`)
         .then(res => {
             console.log(res.data)
             setProducts(res.data)
+            setIsloading(false)
         })
         .catch(err => {
             console.log(err)
+            setIsloading(false)
         })
     }
 
     const getUsers = async () => {
+
+        setIsloading(true)
         axios.get(`${baseUrl}/user`)
         .then(res => {
             console.log(res.data)
             setUsers(res.data)
+            setIsloading(false)
         })
         .catch(err => {
             console.log(err)
+            setIsloading(false)
         })
     }
 
     const addProduct = (name, price, image, is_active) => {
+        
+        setIsloadingModal(true)
         axios.post(`${baseUrl}/product`, {
             name,
             price,
@@ -70,14 +82,19 @@ const Dashboard = () => {
             console.log(res)
             getProducts()
             setAddModal(false)
+            setIsloadingModal(false)
 
         })
         .catch(err => {
             console.log(err)
+            setIsloadingModal(false)
+
         })
     }
 
     const register = (name, email, phone, password, role, is_active) => {
+
+        setIsloadingModal(true)
         axios.post(`${baseUrl}/user/register`, {
             name,
             email,
@@ -90,10 +107,14 @@ const Dashboard = () => {
             console.log(res)
             getUsers()
             setAddUserModal(false)
+            setIsloadingModal(false)
+
 
         })
         .catch(err => {
             console.log(err)
+            setIsloadingModal(false)
+
         })
     }
     
@@ -186,10 +207,15 @@ const Dashboard = () => {
                         </div>
                         <div>
                             {/* product list */}
-                            {!!products.length && 
+                            {!!isLoading ? 
+                                <div className='flex m-4 justify-center'>
+                                    <Spinner color="info" aria-label="Info spinner example" />
+                                </div> :
+                            !!products.length && 
                                 products.slice(0, 10).map((product, i) => {
                                     return <ProductListFront product={product} key={i}/>
                                 })
+                            
                             }
                         </div>
                     </div>
@@ -198,7 +224,7 @@ const Dashboard = () => {
             { currentTab === 'user' &&
                 <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
                     <Modal show={addUserModal} size="md" popup onClose={() => setAddUserModal(false)}>
-                        <AddUser register={register}/>
+                        <AddUser register={register} isLoading={isLoadingModal}/>
                     </Modal>
                     <div className='flex justify-between'>
                         <p className='font-medium text-xl'>Manajemen User</p>
@@ -216,7 +242,11 @@ const Dashboard = () => {
                         </div>
                         <div>
                             {/* user list */}
-                            {!!users.length && 
+                            {!!isLoading ? 
+                                <div className='flex m-4 justify-center'>
+                                    <Spinner color="info" aria-label="Info spinner example" />
+                                </div> :
+                            !!users.length && 
                                 users.map((user, i) => {
                                     return <UserList user={user} getUsers={getUsers} key={i}/>
                                 })
@@ -228,7 +258,7 @@ const Dashboard = () => {
             { currentTab === 'product' &&
                 <div className="px-12 py-10 sm:ml-64 mt-20 h-full bg-slate-100">
                     <Modal show={addModal} size="md" popup onClose={() => setAddModal(false)}>
-                        <AddProduct addProduct={addProduct}/>
+                        <AddProduct addProduct={addProduct} isLoading={isLoadingModal}/>
                     </Modal>
                     <div className='flex justify-between'>
                         <p className='font-medium text-xl'>Manajemen Produk</p>
@@ -245,7 +275,11 @@ const Dashboard = () => {
                         </div>
                         <div>
                             {/* prouduct list */}
-                            {!!products.length &&
+                            {!!isLoading ? 
+                                <div className='flex m-4 justify-center'>
+                                    <Spinner color="info" aria-label="Info spinner example" />
+                                </div> :
+                            !!products.length &&
                                 products.map((product, i) => {
                                     return <ProductList product={product} getProducts={getProducts}  key={i}/>
                                 })

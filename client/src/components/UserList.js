@@ -10,8 +10,11 @@ const UserList = ({user, getUsers}) => {
 
     const [editModal, setEditModal] = useState(false);
     const [deleteUserModal, setDeleteUserModal] = useState(false)
+    const [isLoading, setIsloading] = useState(false)
 
     const editUser = (id, name, email, phone, is_active, role) => {
+
+        setIsloading(true)
         axios.put(`${baseUrl}/user/${id}`, {
             name,
             email,
@@ -23,33 +26,42 @@ const UserList = ({user, getUsers}) => {
             console.log(res)
             getUsers()
             setEditModal(false)
+            setIsloading(false)
+
 
         })
         .catch(err => {
             console.log(err.response)
+            setIsloading(false)
+
         })
     }
 
     const deleteUser = (id) => {
+
+        setIsloading(true)
         axios.delete(`${baseUrl}/user/${id}`)
         .then(res => {
             console.log(res)
             getUsers()
             setDeleteUserModal(false)
+            setIsloading(false)
 
         })
         .catch(err => {
             console.log(err)
+            setIsloading(false)
+
         })
     }
 
     return (
         <>
             <Modal show={editModal} size="md" popup onClose={() => setEditModal(false)}>
-                <EditUser user={user} editUser={editUser} setEditModal={setEditModal}/>
+                <EditUser user={user} editUser={editUser} setEditModal={setEditModal} isLoading={isLoading}/>
             </Modal>
             <Modal show={deleteUserModal} size="md" popup onClose={() => setDeleteUserModal(false)}>
-                <Delete type={'user'} user={user} deleteUser={deleteUser} setDeleteUserModal={setDeleteUserModal}/>
+                <Delete type={'user'} user={user} deleteUser={deleteUser} setDeleteUserModal={setDeleteUserModal} isLoading={isLoading}/>
             </Modal>
             <div className='my-4 p-2 flex justify-start items-center'>
                 <p className='w-8 text-center'>{user.id}</p>

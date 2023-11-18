@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, ToggleSwitch , Label, Modal, TextInput } from 'flowbite-react';
+import { Button, ToggleSwitch , Label, Modal, TextInput, Spinner } from 'flowbite-react';
 
 
-const AddProduct = ({addProduct}) => {
+const AddProduct = ({addProduct, isLoading}) => {
 
     const [switch1, setSwitch1] = useState(true);
     const [name, setName] = useState('')
@@ -53,9 +53,14 @@ const AddProduct = ({addProduct}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full flex justify-center">
-                            <Button onClick={handleSubmit}>SIMPAN</Button>
-                        </div>
+                        {!!isLoading ? 
+                            <div className='flex m-4 justify-center'>
+                                <Spinner color="info" aria-label="Info spinner example" />
+                            </div> :
+                            <div className="w-full flex justify-center">
+                                <Button onClick={handleSubmit}>SIMPAN</Button>
+                            </div>
+                        }
                     </div>
                 </Modal.Body>
             {/* </Modal> */}

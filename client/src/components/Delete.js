@@ -1,7 +1,7 @@
-import { Button, Modal } from 'flowbite-react'
+import { Button, Modal, Spinner } from 'flowbite-react'
 import React from 'react'
 
-const Delete = ({type, product, deleteProduct, setDeleteModal, user, deleteUser, setDeleteUserModal}) => {
+const Delete = ({type, product, deleteProduct, setDeleteModal, user, deleteUser, setDeleteUserModal, isLoading}) => {
   return (
     <>
         <Modal.Header />
@@ -14,24 +14,31 @@ const Delete = ({type, product, deleteProduct, setDeleteModal, user, deleteUser,
             Are you sure you want to delete this?
             </h3>
             <div className="flex justify-center gap-4">
-            {type === 'product' &&
+            {!!isLoading ? 
+                <div className='flex m-4 justify-center'>
+                    <Spinner color="info" aria-label="Info spinner example" />
+                </div> :
                 <>
-                    <Button color="failure" onClick={() => deleteProduct(product.id)}>
-                        {"Yes, I'm sure"}
-                    </Button>
-                    <Button color="gray" onClick={() => setDeleteModal(false)}>
-                        No, cancel
-                    </Button>
-                </>
-            }
-            {type === 'user' &&
-                <>
-                    <Button color="failure" onClick={() => deleteUser(user.id)}>
-                        {"Yes, I'm sure"}
-                    </Button>
-                    <Button color="gray" onClick={() => setDeleteUserModal(false)}>
-                        No, cancel
-                    </Button>
+                    {type === 'product' &&
+                        <>
+                            <Button color="failure" onClick={() => deleteProduct(product.id)}>
+                                {"Yes, I'm sure"}
+                            </Button>
+                            <Button color="gray" onClick={() => setDeleteModal(false)}>
+                                No, cancel
+                            </Button>
+                        </>
+                    }
+                    {type === 'user' &&
+                        <>
+                            <Button color="failure" onClick={() => deleteUser(user.id)}>
+                                {"Yes, I'm sure"}
+                            </Button>
+                            <Button color="gray" onClick={() => setDeleteUserModal(false)}>
+                                No, cancel
+                            </Button>
+                        </>
+                    }
                 </>
             }
             </div>

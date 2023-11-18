@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, ToggleSwitch , Label, Modal, TextInput, Select } from 'flowbite-react';
+import { Button, ToggleSwitch , Label, Modal, TextInput, Select, Spinner } from 'flowbite-react';
 
 
-const AddUser = ({user, register}) => {
+const AddUser = ({user, register, isLoading}) => {
 
     const [switch1, setSwitch1] = useState(true);
     const [name, setName] = useState('')
@@ -71,9 +71,14 @@ const AddUser = ({user, register}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full flex justify-center">
-                            <Button onClick={handleSubmit}>SIMPAN</Button>
-                        </div>
+                        {!!isLoading ? 
+                            <div className='flex m-4 justify-center'>
+                                <Spinner color="info" aria-label="Info spinner example" />
+                            </div> :
+                            <div className="w-full flex justify-center">
+                                <Button onClick={handleSubmit}>SIMPAN</Button>
+                            </div>
+                        }
                     </div>
                 </Modal.Body>
             {/* </Modal> */}
