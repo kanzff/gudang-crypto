@@ -49,7 +49,10 @@ const Register = () => {
         <>
             <div className='mt-32 max-w-screen-2xl flex items-center justify-center mx-auto p-4'>
                 <div className="w-[30rem] space-y-6 border rounded-lg p-8 h-[555px] flex justify-center items-center bg-blue-300">
-                    <p className='text-4xl font-semibold'>Perfey</p>
+                    <div>
+                        <p className='text-4xl text-center font-semibold my-5'>Perfey</p>
+                        <p className='text-center px-6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis quam ac elit auctor accumsan in sed justo. Phasellus pulvinar fringilla maximus. Fusce congue eget erat eget fermentum. Vivamus et lacus vitae nulla condimentum vehicula.</p>
+                    </div>
                 </div>
                 <div className="w-[30rem] space-y-6 border rounded-lg p-8">
                     <h3 className="text-2xl text-center font-medium text-gray-900 dark:text-white">Register</h3>

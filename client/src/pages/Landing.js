@@ -117,7 +117,7 @@ const Landing = () => {
                             <Spinner color="info" aria-label="Info spinner example" />
                         </div> :
                         <div className='flex justify-center'>
-                            <button onClick={() => getProducts(productsLimit + 5, 0)} type="button" className="ml-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lihat lebih banyak</button>
+                            <button onClick={() => getProducts(productsLimit + 5, 0)} type="button" className="ml-10 text-blue-600 border border-blue-600 hover:bg-slate-100 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lihat lebih banyak</button>
                         </div>
                     }
                 </div>
