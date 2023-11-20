@@ -5,7 +5,10 @@ import ProductCard from '../components/ProductCard'
 import Footer from '../components/Footer'
 import axios from 'axios'
 import { baseUrl } from '../api/api'
-import { Spinner } from 'flowbite-react'
+import { Carousel, Spinner } from 'flowbite-react'
+import perfume1 from '../assets/perfume_1.jpg'
+import perfume2 from '../assets/perfume_2.jpg'
+import perfume3 from '../assets/perfume_3.jpg'
 
 const Landing = () => {
 
@@ -66,6 +69,13 @@ const Landing = () => {
             <Navbar getProducts={getProducts} ></Navbar>
             {/* product list */}
             <div className='mt-32 max-w-screen-2xl items-center justify-between mx-auto p-4'>
+                <div className="mx-10 mb-8 w-[90rem] flex justify-center h-96">
+                    <Carousel>
+                        <img src={perfume1} alt="..." />
+                        <img src={perfume2} alt="..." />
+                        <img src={perfume3} alt="..." />
+                    </Carousel>
+                    </div>
                 <div className='newest-newest-product mb-8'>
                     <h1 className='font-bold text-2xl ml-10'>Terbaru</h1>
                     {!!isLoading &&
